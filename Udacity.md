@@ -11,7 +11,7 @@ Làm sao mà gg có thể xử lý hàng tỉ tỉ queries mỗi năm? Cũng nh�
 
 ## Projects
 Học phải đi đôi với hành! Learning by doing!
-Project 1: Sử dụng SQL với cơ sở dữ liệu quan hệ về movie rentals.
+Project 1: Sử dụng SQL với cơ sở dữ liệu quan hệ về online DVD rentals.
 Project 2: Sử dụng Python để phân tích bike share data được thu thập từ 3 cities.
 Project 3: Build Github profile để share về các project khác.
 
@@ -108,3 +108,256 @@ Before we dive into writing Structured Query Language (SQL) queries, let's take 
 I think it is an important distinction to say that SQL is a language. Hence, the last word of SQL being language. SQL is used all over the place beyond the databases we will utilize in this class. With that being said, SQL is most popular for its interaction with databases. For this class, you can think of a database as a bunch of excel spreadsheets all sitting in one place. Not all databases are a bunch of excel spreadsheets sitting in one place, but it is a reasonable idea for this class.
 
 **Why Do Data Analysts Use SQL?**
+Tại sao lại sử dụng SQL?
+Có từ lâu đời.
+Là ngôn ngữ tiêu chuẩn.
+![alt text](image-9.png)
+Với SQL ta có thể phân tích sâu hơn, ví dụ so sánh với gg analytics
+![alt text](image-10.png)
+There are some major advantages to using traditional relational databases, which we interact with using SQL. The five most apparent are:
+
++ SQL is easy to understand.
++ Traditional databases allow us to access data directly.
++ Traditional databases allow us to audit and replicate our data.
++ SQL is a great tool for analyzing multiple tables at once.
++ SQL allows you to analyze more complex questions than dashboard tools like Google Analytics.
+
+You will experience these advantages first hand, as we learn to write SQL to interact with data.
+
+I realize you might be getting a little nervous or anxious to start writing code. This might even be the first time you have written in any sort of programming language. I assure you, we will work through examples to help assure you feel supported the whole time to take on this new challenge!
+
+**SQL vs. NoSQL**
+You may have heard of NoSQL, which stands for not only SQL. Databases using NoSQL allow you to write code that interacts with the data a bit differently than what we will do in this course. These NoSQL environments tend to be particularly popular for web-based data, but less popular for data that lives in spreadsheets the way we have been analyzing data up to this point. One of the most popular NoSQL languages is called MongoDB(opens in a new tab). Udacity has a full course on MongoDB that you can take for free here(opens in a new tab), but these will not be a focus of this program.
+
+NoSQL is not a focus for this course, but you might see it referenced in the real world!
+
+**Code from the Video**
+Throughout the course, you can copy and paste the code from the video walkthroughs into the workspaces to try things out yourself. Even better you can practice writing the queries to help build muscle memory for writing SQL commands.
+
+```SQL
+SELECT account_id,
+       occurred_at,
+       standard_qty,
+       gloss_qty,
+       poster_qty
+FROM orders
+WHERE (standard_qty = 0 OR gloss_qty = 0 OR poster_qty = 0)
+AND occurred_at = '2016-10-01'
+```
+Below is the workspace where you can write your queries. Once you write your queries against the above mentioned questions, you can click on the EVALUATE button at the bottom of the workspace.
+
+Hầu hết các ứng dụng đều cần lưu trữ data để có thể lấy ra sử dụng sau này. Ví dụ như Twitter, mỗi bài đăng cần được lưu trữ để mọi người có thể xem được.
+![alt text](image-8.png)
+Twitter sẽ lưu hàng tá thông tin về bài Tweet, như là ai là tác giả, thời gian viết, bao nhiêu tym, có nhắc đến ai không, ... rất rất nhiều thứ.
+Tất cả thông tin được sử dụng để xác định ai sẽ nhìn được bài Tweet và khi nào họ sẽ nhìn thấy nó, ...
+Data integrity?
+Make sure that the data entered is consistent.
+Vd: số người con của tôi thì chắc chắn phải là số nguyên, không thể là số thập phân kiểu 1.8 người con?
+Database tối ưu tốc độ xử lý/phản hồi, phân quyền truy cập
+
+**Why Businesses Like Databases**
+1. Data integrity is ensured - only the data you want to be entered is entered, and only certain users are able to enter data into the database.
+2. Data can be accessed quickly - SQL allows you to obtain results very quickly from the data stored in a database. Code can be optimized to quickly pull results.
+3. Data is easily shared - multiple individuals can access data stored in a database, and the data is the same for all users allowing for consistent results for anyone with access to your database.
+
+### Why SQL is Important
+![alt text](image-11.png)
+Database lưu dữ liệu thành các bảng, mỗi bảng gồm nhiều cột, tên các cột là duy nhất, kiểu dữ liệu được lưu trong các cột là giống nhau, text là text mà số là số.
+A few key points about data stored in SQL databases:
+
+1. **Data in databases is stored in tables that can be thought of just like Excel spreadsheets**. For the most part, you can think of a database as a bunch of Excel spreadsheets. Each spreadsheet has rows and columns. Where each row holds data on a transaction, a person, a company, etc., while each column holds data pertaining to a particular aspect of one of the rows you care about like a name, location, a unique id, etc.
+
+2. **All the data in the same column must match in terms of data type**.
+An entire column is considered quantitative, discrete, or as some sort of string. This means if you have one row with a string in a particular column, the entire column might change to a text data type. This can be very bad if you want to do math with this column!
+
+3. **Consistent column types are one of the main reasons working with databases is fast**. Often databases hold a LOT of data. So, knowing that the columns are all of the same types of data means that obtaining data from a database can still be fast.
+
+### Types of Databases
+**SQL Databases**
+There are many different types of SQL databases designed for different purposes. In this course, we will use Postgres(opens in a new tab) within the classroom, which is a popular open-source database with a very complete library of analytical functions. (Note: You do not need to install PostgreSQL on your computer unless you really want to. We provide SQL environments in the classroom for you to work in.)
+
+Some of the most popular databases include:
+
+1. MySQL
+2. Access
+3. Oracle
+4. Microsoft SQL Server
+5. Postgres
+
+You can also write SQL within other programming frameworks like Python, Scala, and Hadoop.
+
+**Small Differences**
+Each of these SQL databases may have subtle differences in syntax and available functions -- for example, MySQL doesn’t have some of the functions for modifying dates as Postgres. Most of what you see with Postgres will be directly applicable to using SQL in other frameworks and database environments. For the differences that do exist, you should check the documentation. Most SQL environments have great documentation online that you can easily access with a quick Google search.
+
+The article on relational databases(opens in a new tab) compares three of the most common types of SQL: SQLite, PostgreSQL, and MySQL. Again, once you have learned how to write SQL in one environment, the skills are mostly transferable.
+
+So with that, let's jump in!
+
+### Types of Statements
+The key to SQL is understanding statements. A few statements include:
+
+1. CREATE TABLE is a statement that creates a new table in a database.
+2. DROP TABLE is a statement that removes a table in a database.
+3. SELECT allows you to read data and display it. This is called a query.
+
+The SELECT statement is the common statement used by analysts, and you will be learning all about them throughout this course!
+
+Là 1 data analyst chúng ta ít khi cập nhật thêm sửa xóa dữ liệu mà thay vào đó là đọc và tận dụng dữ liệu.
+Quiz
+![alt text](image-12.png)
+
+### SELECT & FROM
+Here you were introduced to the SQL command that will be used in every query you write: SELECT ... FROM ....
+
+1. **SELECT** indicates which column(s) you want to be given the data for.
+
+2. **FROM** specifies from which table(s) you want to select the columns. Notice the columns need to exist in this table.
+
+If you want to be provided with the data from all columns in the table, you use "*", like so:
+
+> SELECT * FROM orders
+
+Note that using SELECT does not create a new table with these columns in the database, it just provides the data to you as the results, or output, of this command.
+
+You will use this SQL SELECT statement in every query in this course, but you will be learning a few additional statements and operators that can be used along with them to ask more advanced questions of your data.
+
+### Formatting Best Practices
+![alt text](image-13.png)
+However, you may have noticed that we have been capitalizing SELECT and FROM, while we leave table and column names in lower case. This is because even though SQL is case-insensitive, **it is common and best practice to capitalize all SQL commands, like SELECT and FROM, and keep everything else in your query lower case.**
+
+Capitalizing command words makes queries easier to read, which will matter more as you write more complex queries. For now, it is just a good habit to start getting into, to make your SQL queries more readable.
+
+One other note: The text data stored in SQL tables can be either upper or lower case, and SQL **is case-sensitive in regard to this text data.**
+
+**Avoid Spaces in Table and Variable Names**
+It is common to use **underscores** and avoid spaces in column names. It is a bit annoying to work with spaces in SQL. In Postgres, if you have spaces in column or table names, you need to refer to these columns/tables with double quotes around them (Ex: FROM "Table Name" as opposed to FROM table_name). In other environments, you might see this as square brackets instead (Ex: FROM [Table Name]).
+![alt text](image-14.png)
+![alt text](image-15.png)
+Phew!!! That was a lot of rules. Let's just write some queries. You will make mistakes, but that is part of the learning process!
+
+# LIMIT
+We have already seen the SELECT (to choose columns) and FROM (to choose tables) statements. The LIMIT statement is useful when you want to see just the first few rows of a table. This can be much faster for loading than if we load the entire dataset.
+
+The LIMIT command is always the very last part of a query. An example of showing just the first 10 rows of the orders table with all of the columns might look like the following:
+![alt text](image-16.png)
+![alt text](image-17.png)
+
+### ORDER BY
+The ORDER BY statement allows us to sort our results using the data in any column. If you are familiar with Excel or Google Sheets, using ORDER BY is similar to sorting a sheet using a column. **A key difference, however, is that using ORDER BY in a SQL query only has temporary effects, for the results of that query, unlike sorting a sheet by column in Excel or Sheets.**
+
+In other words, when you use ORDER BY in a SQL query, your output will be sorted that way, but then the next query you run will encounter the unsorted data again. It's important to keep in mind that this is different than using common spreadsheet software, where sorting the spreadsheet by column actually alters the data in that sheet until you undo or change that sorting. This highlights the meaning and function of a SQL "query."
+
+The ORDER BY statement always comes in a query after the SELECT and FROM statements, but before the LIMIT statement. If you are using the LIMIT statement, **it will always appear last. As you learn additional commands, the order of these statements will matter more.**
+
+**Pro-Tip**
+Remember **DESC** can be added after the column in your ORDER BY statement to sort in descending order, as the default is to sort in ascending order.
+![alt text](image-18.png)
+
+### ORDER BY Part II
+Here, we saw that we can ORDER BY more than one column at a time. When you provide a list of columns in an ORDER BY command, the sorting occurs using **the leftmost column in your list first**, then the next column from the left, and so on. We still have the ability to flip the way we order using DESC.
+![alt text](image-19.png)
+This query selected account_id and total_amt_usd from the orders table, and orders the results first by total_amt_usd in descending order and then account_id.
+**Solutions to previous ORDER BY Questions**
+1. Write a query that displays the order ID, account ID, and total dollar amount for all the orders, sorted first by the account ID (in ascending order), and then by the total dollar amount (in descending order).
+```SQL
+SELECT id, account_id, total_amt_usd
+FROM orders
+ORDER BY account_id, total_amt_usd DESC;
+```
+2. Now write a query that again displays order ID, account ID, and total dollar amount for each order, but this time sorted first by total dollar amount (in descending order), and then by account ID (in ascending order).
+```SQL
+SELECT id, account_id, total_amt_usd
+FROM orders
+ORDER BY total_amt_usd DESC, account_id;
+```
+Compare the results of these two queries above. How are the results different when you switch the column you sort on first? **In query #1, all of the orders for each account ID are grouped together, and then within each of those groupings, the orders appear from the greatest order amount to the least. In query #2, since you sorted by the total dollar amount first, the orders appear from greatest to least regardless of which account ID they were from. Then they are sorted by account ID next. (The secondary sorting by account ID is difficult to see here since only if there were two orders with equal total dollar amounts would there need to be any sorting by account ID.)**
+
+### WHERE
+Using the WHERE statement, we can display subsets of tables based on conditions that must be met. You can also think of the WHERE command as filtering the data.
+
+This video above shows how this can be used, and in the upcoming concepts, you will learn some common operators that are useful with the WHERE statement.
+
+Common symbols used in WHERE statements include:
+
+1. \> (greater than)
+
+2. < (less than)
+
+3. \>= (greater than or equal to)
+
+4. <= (less than or equal to)
+
+5. = (equal to)
+
+6. != (not equal to)
+
+![alt text](image-20.png)
+
+![alt text](image-21.png)
+
+![alt text](image-22.png)
+
+### WHERE with Non-Numeric Data
+The WHERE statement can also be used with non-numeric data. We can use the = and != operators here. You need to be sure to use single quotes (just be careful if you have quotes in the original text) with the text data, not double quotes.
+
+Commonly when we are using WHERE with non-numeric data fields, we use the LIKE, NOT, or IN operators. We will see those before the end of this lesson!
+![alt text](image-23.png)
+![alt text](image-24.png)
+![alt text](image-25.png)
+**Note: If you received an error message when executing your query, remember that SQL requires single-quotes, not double-quotes, around text values like 'Exxon Mobil.'**
+
+### Arithmetic Operators
+**Derived Columns**
+Creating a new column that is a combination of existing columns is known as a derived column (or "calculated" or "computed" column). Usually, you want to give a name, or "alias," to your new column using the **AS** keyword.
+
+This derived column, and its alias, are generally only temporary, existing just for the duration of your query. The next time you run a query and access this table, the new column will not be there.
+
+If you are deriving the new column from existing columns using a mathematical expression, then these familiar mathematical operators will be useful:
+
+1. * (Multiplication)
+2. + (Addition)
+3. - (Subtraction)
+4. / (Division)
+
+Consider this example:
+
+```SQL
+SELECT id, (standard_amt_usd/total_amt_usd)*100 AS std_percent, total_amt_usd
+FROM orders
+LIMIT 10;
+```
+Here we divide the standard paper dollar amount by the total order amount to find the standard paper percent for the order, and use the **AS** keyword to name this new column "std_percent." You can run this query on the next page if you'd like, to see the output.
+![alt text](image-26.png)
+![alt text](image-27.png)
+![alt text](image-28.png)
+![alt text](image-29.png)
+
+### Introduction to Logical Operators
+In the next concepts, you will be learning about Logical Operators. Logical Operators include:
+
+1. LIKE This allows you to perform operations similar to using WHERE and =, but for cases when you might not know exactly what you are looking for.
+2. IN This allows you to perform operations similar to using WHERE and =, but for more than one condition.
+3. NOT This is used with IN and LIKE to select all of the rows NOT LIKE or NOT IN a certain condition.
+4. AND & BETWEEN These allow you to combine operations where all combined conditions must be true.
+5. OR This allows you to combine op
+
+### LIKE
+The LIKE operator is extremely useful for working with text. You will use LIKE within a WHERE clause. The LIKE operator is frequently used with %. The % tells us that we might want any number of characters leading up to a particular set of characters or following a certain set of characters, as we saw with the google syntax above. Remember you will need to use single quotes for the text you pass to the LIKE operator because these lower and uppercase letters are not the same within the string. Searching for 'T' is not the same as searching for 't'. In other SQL environments (outside the classroom), you can use either single or double-quotes.
+
+Hopefully, you are starting to get more comfortable with SQL, as we are starting to move toward operations that have more applications, but this also means we can't show you every use case. Hopefully, you can start to think about how you might use these types of applications to identify phone numbers from a certain region or an individual where you can't quite remember the full name.
+![alt text](image-30.png)
+*Note: wild card % mang ý nghĩa là nó có thể đại diện cho bất kỳ chuỗi kí tự nào đó vd: xy46google78yzwr.
+![alt text](image-31.png)
+![alt text](image-32.png)
+
+### IN
+The IN operator is useful for working with both numeric and text columns. This operator allows you to use an =, but for more than one item of that particular column. We can check one, two, or many column values for which we want to pull data, but all within the same query. In the upcoming concepts, you will see the OR operator that would also allow us to perform these tasks, but the IN operator is a cleaner way to write these queries.
+![alt text](image-33.png)
+**Expert Tip**
+In most SQL environments, although not in our Udacity's classroom, you can use single or double quotation marks - and you may NEED to use double quotation marks if you have an apostrophe within the text you are attempting to pull.
+
+In our Udacity SQL workspaces, note you can include an apostrophe by putting two single quotes together. For example, Macy's in our workspace would be 'Macy''s'.
+![alt text](image-34.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
+![alt text](image-37.png)
