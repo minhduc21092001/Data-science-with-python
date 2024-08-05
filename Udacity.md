@@ -314,10 +314,12 @@ This derived column, and its alias, are generally only temporary, existing just 
 
 If you are deriving the new column from existing columns using a mathematical expression, then these familiar mathematical operators will be useful:
 
+```
 1. * (Multiplication)
 2. + (Addition)
 3. - (Subtraction)
 4. / (Division)
+```
 
 Consider this example:
 
@@ -361,3 +363,241 @@ In our Udacity SQL workspaces, note you can include an apostrophe by putting two
 ![alt text](image-35.png)
 ![alt text](image-36.png)
 ![alt text](image-37.png)
+
+### NOT
+The NOT operator is an extremely useful operator for working with the previous two operators we introduced: IN and LIKE. By specifying NOT LIKE or NOT IN, we can grab all of the rows that do not meet particular criteria.
+![alt text](image-38.png)
+![alt text](image-39.png)
+![alt text](image-40.png)
+![alt text](image-41.png)
+
+### AND and BETWEEN
+![alt text](image-42.png)
+**BETWEEN Operator**
+Sometimes we can make a cleaner statement using **BETWEEN** than we can use **AND**. Particularly this is true when we are using the same column for different parts of our **AND** statement. In the previous video, we probably should have used **BETWEEN**.
+![alt text](image-43.png)
+![alt text](image-44.png)
+![alt text](image-45.png)
+![alt text](image-46.png)
+![alt text](image-47.png)
+```SQL
+SELECT *
+FROM web_events
+WHERE channel IN ('organic', 'adwords') AND occurred_at BETWEEN '2016-01-01' AND '2017-01-01'
+ORDER BY occurred_at DESC;
+```
+
+### OR
+![alt text](image-48.png)
+Sử dụng ngoặc để kết hợp AND với OR
+![alt text](image-49.png)
+![alt text](image-50.png)
+![alt text](image-51.png)
+
+### Lession recap
+
+**Commands**
+You have already learned a lot about writing code in SQL! Let's take a moment to recap all that we have covered before moving on:
+![alt text](image-52.png)
+*Note: BETWEEN và IN có lấy điều kiện biên
+
+![alt text](image-53.png)
+![alt text](image-54.png)
+![alt text](image-55.png)
+
+## SQL Join
+![alt text](image-56.png)
+So above, we understand that all of the information related to an account is not in the orders table, but why not? Watch the below video to find out!
+![alt text](image-57.png)
+![alt text](image-58.png)
+![alt text](image-60.png)
+![alt text](image-59.png)
+Có thể thấy 1 bảng thì thông thường chỉ cần thay đổi thông tin, số lượng hàng không thay đổi, còn 1 bảng thì cần thêm hàng liên tục khi người dùng mua thêm nhiều đơn mới, nên cần thiết tách thành bảng riêng để dễ dàng quản lý.
+![alt text](image-61.png)
+![alt text](image-62.png)
+*Note: Nếu gộp bảng một cách không khoa học, thì khi thông tin của 1 người dùng bị thay đổi, cần cập nhật ở rất nhiều hàng, dẫn tới việc tốn kém xử lý
+
+### JOIN
+![alt text](image-63.png)
+![alt text](image-64.png)
+![alt text](image-65.png)
+![alt text](image-66.png)
+![alt text](image-67.png)
+![alt text](image-68.png)
+Joining tables allows you access to each of the tables in the SELECT statement through the table name, and the columns will always follow a . after the table name.
+
+Now it's your turn.
+![alt text](image-69.png)
+![alt text](image-70.png)
+![alt text](image-72.png)
+![alt text](image-73.png)
+![alt text](image-74.png)
+![alt text](image-75.png)
+![alt text](image-76.png)
+![alt text](image-77.png)
+![alt text](image-78.png)
+![alt text](image-79.png)
+![alt text](image-80.png)
+![alt text](image-81.png)
+![alt text](image-82.png)
+![alt text](image-83.png)
+![alt text](image-84.png)
+![alt text](image-85.png)
+![alt text](image-86.png)
+![alt text](image-87.png)
+![alt text](image-88.png)
+![alt text](image-89.png)
+![alt text](image-90.png)
+![alt text](image-91.png)
+![alt text](image-92.png)
+![alt text](image-93.png)
+![alt text](image-94.png)
+![alt text](image-95.png)
+![alt text](image-96.png)
+![alt text](image-97.png)
+![alt text](image-98.png)
+![alt text](image-99.png)
+![alt text](image-100.png)
+![alt text](image-101.png)
+![alt text](image-102.png)
+![alt text](image-103.png)
+![alt text](image-104.png)
+![alt text](image-105.png)
+
+### JOIN AND FILTER
+![alt text](image-106.png)
+![alt text](image-107.png)
+![alt text](image-108.png)
+![alt text](image-109.png)
+![alt text](image-110.png)
+![alt text](image-111.png)
+![alt text](image-112.png)
+![alt text](image-113.png)
+![alt text](image-114.png)
+![alt text](image-115.png)
+![alt text](image-116.png)
+![alt text](image-117.png)
+![alt text](image-118.png)
+![alt text](image-119.png)
+![alt text](image-120.png)
+![alt text](image-121.png)
+
+## Aggregation
+![alt text](image-122.png)
+![alt text](image-123.png)
+![alt text](image-124.png)
+Không có dữ liệu, bị xóa hoặc thiếu thông tin, khi cần liên lạc thì không có thông tin để liên hệ
+![alt text](image-125.png)
+![alt text](image-126.png)
+![alt text](image-127.png)
+![alt text](image-128.png)
+![alt text](image-129.png)
+![alt text](image-130.png)
+![alt text](image-131.png)
+![alt text](image-132.png)
+![alt text](image-133.png)
+![alt text](image-134.png)
+![alt text](image-135.png)
+![alt text](image-136.png)
+![alt text](image-137.png)
+![alt text](image-138.png)
+![alt text](image-139.png)
+![alt text](image-140.png)
+![alt text](image-141.png)
+![alt text](image-142.png)
+![alt text](image-143.png)
+![alt text](image-144.png)
+![alt text](image-145.png)
+![alt text](image-146.png)
+![alt text](image-147.png)
+![alt text](image-148.png)
+![alt text](image-149.png)
+![alt text](image-150.png)
+![alt text](image-151.png)
+![alt text](image-152.png)
+![alt text](image-154.png)
+![alt text](image-153.png)
+![alt text](image-155.png)
+![alt text](image-156.png)
+![alt text](image-157.png)
+![alt text](image-158.png)
+![alt text](image-159.png)
+![alt text](image-160.png)
+![alt text](image-161.png)
+![alt text](image-162.png)
+![alt text](image-163.png)
+![alt text](image-164.png)
+![alt text](image-165.png)
+![alt text](image-166.png)
+![alt text](image-167.png)
+![alt text](image-168.png)
+![alt text](image-169.png)
+![alt text](image-170.png)
+![alt text](image-171.png)
+![alt text](image-172.png)
+![alt text](image-173.png)
+![alt text](image-174.png)
+![alt text](image-175.png)
+![alt text](image-176.png)
+![alt text](image-177.png)
+![alt text](image-178.png)
+Day of the week
+![alt text](image-179.png)
+![alt text](image-180.png)
+![alt text](image-181.png)
+![alt text](image-182.png)
+![alt text](image-183.png)
+![alt text](image-184.png)
+![alt text](image-185.png)
+![alt text](image-186.png)
+![alt text](image-187.png)
+![alt text](image-188.png)
+![alt text](image-189.png)
+Mô tả lại sẽ clear hơn và giống với lable hơn
+![alt text](image-190.png)
+![alt text](image-191.png)
+![alt text](image-192.png)
+![alt text](image-193.png)
+![alt text](image-194.png)
+![alt text](image-195.png)
+![alt text](image-196.png)
+![alt text](image-197.png)
+![alt text](image-198.png)
+![alt text](image-199.png)
+![alt text](image-200.png)
+![alt text](image-201.png)
+![alt text](image-202.png)
+
+## Subqueries
+![alt text](image-203.png)
+![alt text](image-204.png)
+![alt text](image-205.png)
+![alt text](image-206.png)
+![alt text](image-207.png)
+![alt text](image-209.png)
+take a stab at this quiz: hãy đâm 1 nhát vào bài quiz này haha
+![alt text](image-210.png)
+![alt text](image-211.png)
+![alt text](image-212.png)
+![alt text](image-213.png)
+![alt text](image-214.png)
+caveat -> cảnh báo
+![alt text](image-215.png)
+![alt text](image-216.png)
+![alt text](image-217.png)
+![alt text](image-218.png)
+![alt text](image-219.png)
+![alt text](image-220.png)
+![alt text](image-221.png)
+![alt text](image-222.png)
+![alt text](image-223.png)
+![alt text](image-224.png)
+![alt text](image-225.png)
+![alt text](image-226.png)
+![alt text](image-227.png)
+![alt text](image-228.png)
+![alt text](image-229.png)
+![alt text](image-230.png)
+![alt text](image-231.png)
+![alt text](image-232.png)
+![alt text](image-233.png)
