@@ -601,3 +601,78 @@ caveat -> cảnh báo
 ![alt text](image-231.png)
 ![alt text](image-232.png)
 ![alt text](image-233.png)
+
+## SQL Window Functions
+![alt text](image-270.png)
+![alt text](image-271.png)
+![alt text](image-272.png)
+![alt text](image-273.png)
+![alt text](image-274.png)
+![alt text](image-275.png)
+![alt text](image-276.png)
+![alt text](image-277.png)
+![alt text](image-278.png)
+![alt text](image-279.png)
+![alt text](image-280.png)
+![alt text](image-281.png)
+![alt text](image-282.png)
+![alt text](image-283.png)
+```SQL
+SELECT standard_amt_usd,
+       SUM(standard_amt_usd) OVER (ORDER BY occurred_at) AS running_total
+FROM orders
+```
+![alt text](image-284.png)
+ASC và DESC
+![alt text](image-285.png)
+Trong excel muốn đánh index/rank thì trước tiên phải sắp xếp theo thứ tự trước tiên, ở ví dụ này là giảm dần. Trong SQL cũng vậy, sau OVER chính là việc sắp xếp theo thứ tự, tiếp đến là đánh rank.
+![alt text](image-286.png)
+ORDER BY ở cuối sẽ quyết định thứ tự các hàng/row/record
+![alt text](image-287.png)
+Ý nghĩa của việc dùng PARTITION BY, ORDER BY sắp xếp lại trong vùng PARTITION trước đó
+![alt text](image-288.png)
+![alt text](image-289.png)
+Trong OVER không viết gì cả tức SUM hết tất cả chứ không lũy kế
+![alt text](image-291.png)
+![alt text](image-292.png)
+![alt text](image-293.png)
+![alt text](image-294.png)
+![alt text](image-295.png)
+![alt text](image-296.png)
+![alt text](image-297.png)
+![alt text](image-298.png)
+![alt text](image-299.png)
+![alt text](image-300.png)
+![alt text](image-301.png)
+![alt text](image-302.png)
+![alt text](image-303.png)
+![alt text](image-304.png)
+![alt text](image-305.png)
+![alt text](image-306.png)
+```SQL
+SELECT id,
+       account_id,
+       total,
+       RANK() OVER (PARTITION BY account_id ORDER BY total DESC) AS total_rank
+FROM orders
+```
+![alt text](image-307.png)
+![alt text](image-308.png)
+![alt text](image-309.png)
+![alt text](image-310.png)
+![alt text](image-311.png)
+![alt text](image-312.png)
+```SQL
+SELECT id,
+       account_id,
+       DATE_TRUNC('year',occurred_at) AS year,
+       DENSE_RANK() OVER account_year_window AS dense_rank,
+       total_amt_usd,
+       SUM(total_amt_usd) OVER account_year_window AS sum_total_amt_usd,
+       COUNT(total_amt_usd) OVER account_year_window AS count_total_amt_usd,
+       AVG(total_amt_usd) OVER account_year_window AS avg_total_amt_usd,
+       MIN(total_amt_usd) OVER account_year_window AS min_total_amt_usd,
+       MAX(total_amt_usd) OVER account_year_window AS max_total_amt_usd
+FROM orders 
+WINDOW account_year_window AS (PARTITION BY account_id ORDER BY DATE_TRUNC('year',occurred_at))
+```
