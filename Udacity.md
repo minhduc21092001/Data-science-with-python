@@ -676,3 +676,280 @@ SELECT id,
 FROM orders 
 WINDOW account_year_window AS (PARTITION BY account_id ORDER BY DATE_TRUNC('year',occurred_at))
 ```
+![alt text](image-313.png)
+![alt text](image-314.png)
+![alt text](image-315.png)
+![alt text](image-316.png)
+![alt text](image-317.png)
+![alt text](image-318.png)
+![alt text](image-319.png)
+![alt text](image-320.png)
+![alt text](image-321.png)
+![alt text](image-322.png)
+![alt text](image-323.png)
+![alt text](image-324.png)
+![alt text](image-325.png)
+Solution cho quiz trên
+```SQL
+SELECT occurred_at,
+       total_amt_usd,
+       LEAD(total_amt_usd) OVER (ORDER BY occurred_at) AS lead,
+       LEAD(total_amt_usd) OVER (ORDER BY occurred_at) - total_amt_usd AS lead_difference
+FROM (
+SELECT occurred_at,
+       SUM(total_amt_usd) AS total_amt_usd
+  FROM orders 
+ GROUP BY 1
+) sub
+```
+![alt text](image-326.png)
+![alt text](image-327.png)
+![alt text](image-328.png)
+![alt text](image-329.png)
+![alt text](image-330.png)
+![alt text](image-331.png)
+![alt text](image-332.png)
+![alt text](image-333.png)
+Query 1
+```SQL
+SELECT
+       account_id,
+       occurred_at,
+       standard_qty,
+       NTILE(4) OVER (PARTITION BY account_id ORDER BY standard_qty) AS standard_quartile
+  FROM orders 
+ ORDER BY account_id DESC
+```
+Query 2
+```SQL
+SELECT
+       account_id,
+       occurred_at,
+       gloss_qty,
+       NTILE(2) OVER (PARTITION BY account_id ORDER BY gloss_qty) AS gloss_half
+  FROM orders 
+ ORDER BY account_id DESC
+```
+Query 3
+```SQL
+SELECT
+       account_id,
+       occurred_at,
+       total_amt_usd,
+       NTILE(100) OVER (PARTITION BY account_id ORDER BY total_amt_usd) AS total_percentile
+  FROM orders 
+ ORDER BY account_id DESC
+```
+![alt text](image-334.png)
+![alt text](image-335.png)
+![alt text](image-336.png)
+![alt text](image-337.png)
+![alt text](image-338.png)
+![alt text](image-339.png)
+![alt text](image-340.png)
+![alt text](image-341.png)
+![alt text](image-342.png)
+![alt text](image-343.png)
+![alt text](image-344.png)
+![alt text](image-345.png)
+![alt text](image-346.png)
+![alt text](image-347.png)
+![alt text](image-348.png)
+![alt text](image-349.png)
+![alt text](image-350.png)
+![alt text](image-351.png)
+![alt text](image-352.png)
+![alt text](image-353.png)
+![alt text](image-354.png)
+![alt text](image-355.png)
+![alt text](image-356.png)
+![alt text](image-357.png)
+![alt text](image-358.png)
+```SQL
+SELECT SUM(num) nums, SUM(letter) letters
+FROM (SELECT name, CASE WHEN LEFT(UPPER(name), 1) IN ('0','1','2','3','4','5','6','7','8','9') 
+                          THEN 1 ELSE 0 END AS num, 
+            CASE WHEN LEFT(UPPER(name), 1) IN ('0','1','2','3','4','5','6','7','8','9') 
+                          THEN 0 ELSE 1 END AS letter
+         FROM accounts) t1;
+```
+![alt text](image-359.png)
+```SQL
+SELECT SUM(vowels) vowels, SUM(other) other
+FROM (SELECT name, CASE WHEN LEFT(UPPER(name), 1) IN ('A','E','I','O','U') 
+                           THEN 1 ELSE 0 END AS vowels, 
+             CASE WHEN LEFT(UPPER(name), 1) IN ('A','E','I','O','U') 
+                          THEN 0 ELSE 1 END AS other
+            FROM accounts) t1;
+```
+vowels -> các nguyên âm (hay còn gọi là mẫu âm)
+![alt text](image-360.png)
+![alt text](image-361.png)
+![alt text](image-362.png)
+![alt text](image-363.png)
+![alt text](image-364.png)
+Query 1
+```SQL
+SELECT CONCAT(SALES_REPS.ID, '_', REGION.NAME) EMP_ID_REGION, SALES_REPS.NAME
+FROM SALES_REPS
+JOIN REGION
+ON SALES_REPS.REGION_ID = REGION_ID;
+```
+Query 2
+```SQL
+SELECT NAME, CONCAT(LAT, ', ', LONG) COORDINATE, CONCAT(LEFT(PRIMARY_POC, 1), RIGHT(PRIMARY_POC, 1), '@', SUBSTR(WEBSITE, 5)) EMAIL
+FROM ACCOUNTS;
+```
+
+Query 3
+![alt text](image-365.png)
+![alt text](image-366.png)
+![alt text](image-367.png)
+![alt text](image-368.png)
+```SQL
+SELECT date orig_date, (SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) || '-' || SUBSTR(date, 4, 2)) new_date
+FROM sf_crime_data;
+```
+![alt text](image-369.png)
+```SQL
+SELECT date AS orig_date, CAST((SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) || '-' || SUBSTR(date, 4, 2)) AS DATE) new_date
+FROM sf_crime_data;
+```
+![alt text](image-370.png)
+Sử dụng '||' và '::' thay thế cho CONCAT() và CAST()
+![alt text](image-371.png)
+![alt text](image-372.png)
+![alt text](image-373.png)
+![alt text](image-374.png)
+Coalesce -> hợp nhất
+![alt text](image-375.png)
+![alt text](image-376.png)
+![alt text](image-377.png)
+![alt text](image-378.png)
+![alt text](image-379.png)
+![alt text](image-380.png)
+Query 1
+```SQL
+SELECT LEFT(primary_poc, STRPOS(primary_poc, ' ') -1 ) first_name, 
+RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) last_name
+FROM accounts;
+```
+```SQL
+SELECT LEFT(name, STRPOS(name, ' ') -1 ) first_name, 
+    RIGHT(name, LENGTH(name) - STRPOS(name, ' ')) last_name
+FROM sales_reps;
+```
+![alt text](image-384.png)
+![alt text](image-381.png)
+![alt text](image-382.png)
+![alt text](image-383.png)
+![alt text](image-385.png)
+```SQL
+Query 1
+WITH t1 AS (
+ SELECT LEFT(primary_poc,
+   STRPOS(primary_poc, ' ') -1 ) first_name,  RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) last_name, name
+ FROM accounts)
+SELECT first_name, last_name, CONCAT(first_name, '.', last_name, '@', name, '.com')
+FROM t1;
+```
+Query 2
+```SQL
+WITH t1 AS (
+ SELECT LEFT(primary_poc,     
+   STRPOS(primary_poc, ' ') -1 ) first_name,  RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) last_name, name
+ FROM accounts)
+SELECT first_name, last_name, CONCAT(first_name, '.', last_name, '@', REPLACE(name, ' ', ''), '.com')
+FROM  t1;
+```
+
+Query 3
+```SQL
+WITH t1 AS (
+ SELECT LEFT(primary_poc,     STRPOS(primary_poc, ' ') -1 ) first_name,  RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) last_name, name
+ FROM accounts)
+SELECT first_name, last_name, CONCAT(first_name, '.', last_name, '@', name, '.com'), LEFT(LOWER(first_name), 1) || RIGHT(LOWER(first_name), 1) || LEFT(LOWER(last_name), 1) || RIGHT(LOWER(last_name), 1) || LENGTH(first_name) || LENGTH(last_name) || REPLACE(UPPER(name), ' ', '')
+FROM t1;
+```
+![alt text](image-386.png)
+![alt text](image-387.png)
+![alt text](image-388.png)
+![alt text](image-389.png)
+![alt text](image-390.png)
+![alt text](image-391.png)
+![alt text](image-392.png)
+![alt text](image-393.png)
+Query 2
+```SQL
+SELECT COALESCE(a.id, a.id) filled_id, a.name, a.website, a.lat, a.long, a.primary_poc, a.sales_rep_id, o.*
+FROM accounts a
+LEFT JOIN orders o
+ON a.id = o.account_id
+WHERE o.total IS NULL;
+```
+![alt text](image-394.png)
+
+Query 3
+```SQL
+SELECT COALESCE(a.id, a.id) filled_id, a.name, a.website, a.lat, a.long, a.primary_poc, a.sales_rep_id, COALESCE(o.account_id, a.id) account_id, o.occurred_at, o.standard_qty, o.gloss_qty, o.poster_qty, o.total, o.standard_amt_usd, o.gloss_amt_usd, o.poster_amt_usd, o.total_amt_usd
+FROM accounts a
+LEFT JOIN orders o
+ON a.id = o.account_id
+WHERE o.total IS NULL;
+```
+Query 4
+```SQL
+SELECT COALESCE(a.id, a.id) filled_id, a.name, a.website, a.lat, a.long, a.primary_poc, a.sales_rep_id, COALESCE(o.account_id, a.id) account_id, o.occurred_at, COALESCE(o.standard_qty, 0) standard_qty, COALESCE(o.gloss_qty,0) gloss_qty, COALESCE(o.poster_qty,0) poster_qty, COALESCE(o.total,0) total, COALESCE(o.standard_amt_usd,0) standard_amt_usd, COALESCE(o.gloss_amt_usd,0) gloss_amt_usd, COALESCE(o.poster_amt_usd,0) poster_amt_usd, COALESCE(o.total_amt_usd,0) total_amt_usd
+FROM accounts a
+LEFT JOIN orders o
+ON a.id = o.account_id
+WHERE o.total IS NULL;
+```
+![alt text](image-395.png)
+```SQL
+SELECT COALESCE(a.id, a.id) filled_id, a.name, a.website, a.lat, a.long, a.primary_poc, a.sales_rep_id, COALESCE(o.account_id, a.id) account_id, o.occurred_at, COALESCE(o.standard_qty, 0) standard_qty, COALESCE(o.gloss_qty,0) gloss_qty, COALESCE(o.poster_qty,0) poster_qty, COALESCE(o.total,0) total, COALESCE(o.standard_amt_usd,0) standard_amt_usd, COALESCE(o.gloss_amt_usd,0) gloss_amt_usd, COALESCE(o.poster_amt_usd,0) poster_amt_usd, COALESCE(o.total_amt_usd,0) total_amt_usd
+FROM accounts a
+LEFT JOIN orders o
+ON a.id = o.account_id;
+```
+![alt text](image-396.png)
+![alt text](image-397.png)
+![alt text](image-398.png)
+![alt text](image-399.png)
+![alt text](image-400.png)
+![alt text](image-401.png)
+![alt text](image-402.png)
+![alt text](image-403.png)
+elaborate -> giải thích rõ hơn
+![alt text](image-404.png)
+![alt text](image-405.png)
+![alt text](image-406.png)
+Inequality -> bất cân bằng
+![alt text](image-407.png)
+![alt text](image-408.png)
+![alt text](image-409.png)
+![alt text](image-410.png)
+Solution
+![alt text](image-411.png)
+![alt text](image-412.png)
+![alt text](image-413.png)
+![alt text](image-414.png)
+![alt text](image-415.png)
+![alt text](image-416.png)
+![alt text](image-417.png)
+![alt text](image-418.png)
+![alt text](image-419.png)
+![alt text](image-420.png)
+![alt text](image-421.png)
+![alt text](image-422.png)
+![alt text](image-423.png)
+![alt text](image-424.png)
+![alt text](image-425.png)
+![alt text](image-426.png)
+![alt text](image-427.png)
+![alt text](image-428.png)
+![alt text](image-429.png)
+![alt text](image-430.png)
+![alt text](image-431.png)
+![alt text](image-432.png)
+![alt text](image-433.png)

@@ -101,3 +101,7 @@ The Rentals table captures the rental history of the inventory of movie titles. 
 ![alt text](image-267.png)
 ![alt text](image-268.png)
 ![alt text](image-269.png)
+
+## Knowledge
+![alt text](image-434.png)
+![alt text](image-435.png)
