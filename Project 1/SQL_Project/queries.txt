@@ -1,0 +1,70 @@
+/*Query 1: How many times have the family-friendly movies been rented out?*/
+WITH rented_films AS
+    (SELECT *
+     FROM rental R
+     JOIN inventory I
+     ON I.inventory_id = R.inventory_id
+     JOIN film F
+     ON F.film_id = I.film_id
+     JOIN film_category FC
+     ON FC.film_id = F.film_id
+     JOIN category C
+     ON C.category_id = FC.category_id)
+
+SELECT title AS film_title,
+       name AS category_name,
+       COUNT(*) AS rental_count
+FROM rented_films RF
+WHERE RF.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')
+GROUP BY 1, 2
+ORDER BY 2, 1
+
+/*Query 2: Rental duration level of the family-friendly movies compare to all movies rented out in quartiles?*/
+WITH all_films AS
+    (SELECT title AS film_title,
+            name AS category_name,
+            SUM(rental_duration) AS total_rental_duration
+     FROM film F
+     JOIN film_category FC
+     ON FC.film_id = F.film_id
+     JOIN category C
+     ON C.category_id = FC.category_id
+     GROUP BY 1, 2)
+
+SELECT *, NTILE(4) OVER (ORDER BY total_rental_duration) AS standard_quartile
+FROM all_films
+WHERE category_name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')
+
+/*Query 3: The number of family-friendly movies that have the same rental duration level and category?*/
+WITH family_films_quartiles AS
+    (SELECT title AS film_title,
+            name AS category_name,
+	    rental_duration,
+            NTILE(4) OVER (ORDER BY rental_duration) AS standard_quartile
+     FROM film F
+     JOIN film_category FC
+     ON FC.film_id = F.film_id
+     JOIN category C
+     ON C.category_id = FC.category_id
+     WHERE name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music'))
+
+SELECT category_name,
+       standard_quartile,
+       COUNT(*)
+FROM family_films_quartiles
+GROUP BY 1, 2
+ORDER BY 1, 2
+
+/*Query 4: Compare the rental numbers of any two stores in the same month of the years?*/
+SELECT DATE_PART('month', rental_date) rental_month,
+       DATE_PART('year', rental_date) rental_year,
+       store_id,
+       COUNT(*)
+FROM (SELECT rental_date, store_id
+      FROM rental R
+      JOIN customer C
+      ON C.customer_id = R.customer_id
+      WHERE store_id IN (1, 2))
+GROUP BY 1, 2, 3
+ORDER BY 2, 1, 3
+                        
