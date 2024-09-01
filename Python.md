@@ -399,3 +399,326 @@ def readable_timedelta(days):
 ![alt text](image-708.png)
 ![alt text](image-709.png)
 ![alt text](image-710.png)
+![alt text](image-1092.png)
+![alt text](image-1093.png)
+![alt text](image-1094.png)
+![alt text](image-1095.png)
+![alt text](image-1096.png)
+```Python
+names = input("Enter names separated by commas: ").title().split(",")
+assignments = input("Enter assignment counts separated by commas: ").split(",")
+grades = input("Enter grades separated by commas: ").split(",")
+
+message = "Hi {},\n\nThis is a reminder that you have {} assignments left to \
+submit before you can graduate. You're current grade is {} and can increase \
+to {} if you submit all assignments before the due date.\n\n"
+
+for name, assignment, grade in zip(names, assignments, grades):
+    print(message.format(name, assignment, grade, int(grade) + int(assignment)*2))
+```
+![alt text](image-1097.png)
+![alt text](image-1098.png)
+![alt text](image-1099.png)
+![alt text](image-1100.png)
+![alt text](image-1101.png)
+![alt text](image-1102.png)
+![alt text](image-1103.png)
+![alt text](image-1104.png)
+![alt text](image-1105.png)
+![alt text](image-1106.png)
+![alt text](image-1107.png)
+![alt text](image-1108.png)
+![alt text](image-1109.png)
+![alt text](image-1110.png)
+![alt text](image-1111.png)
+![alt text](image-1112.png)
+![alt text](image-1113.png)
+![alt text](image-1114.png)
+![alt text](image-1115.png)
+![alt text](image-1116.png)
+![alt text](image-1117.png)
+![alt text](image-1118.png)
+![alt text](image-1119.png)
+Here is my solution:
+```Python
+user_list = []
+list_sum = 0
+for i in range(10):
+    userInput = int(input("Enter any number: "))
+    try:
+        user_list.append(userInput)
+        if userInput % 2 == 0:
+            list_sum += userInput
+    except ValueError:
+        print("Incorrect value. That's not an int!")
+print("user_list: {}".format(user_list))
+print("The sum of the even numbers in user_list is: {}.".format(list_sum))
+```
+![alt text](image-1120.png)
+![alt text](image-1121.png)
+![alt text](image-1122.png)
+![alt text](image-1123.png)
+![alt text](image-1124.png)
+![alt text](image-1125.png)
+![alt text](image-1126.png)
+![alt text](image-1127.png)
+```Python
+def generate_password():
+    return random.choice(word_list) + random.choice(word_list) + random.choice(word_list)
+```
+![alt text](image-1128.png)
+![alt text](image-1129.png)
+![alt text](image-1130.png)
+![alt text](image-1131.png)
+![alt text](image-1132.png)
+![alt text](image-1133.png)
+![alt text](image-1134.png)
+![alt text](image-1135.png)
+![alt text](image-1136.png)
+![alt text](image-1137.png)
+![alt text](image-1138.png)
+![alt text](image-1139.png)
+![alt text](image-1140.png)
+![alt text](image-1141.png)
+![alt text](image-1142.png)
+![alt text](image-1143.png)
+Quiz Solution:
+Here's one way you can implement this program!
+```Python
+## function that creates a flower_dictionary from filename
+def create_flowerdict(filename):
+    flower_dict = {}
+    with open(filename) as f:
+        for line in f:
+            letter = line.split(": ")[0].lower() 
+            flower = line.split(": ")[1].strip()
+            flower_dict[letter] = flower
+    return flower_dict
+
+## Main function that prompts for user input, parses out the first letter
+## includes function call for create_flowerdict to create dictionary
+def main(): 
+    flower_d = create_flowerdict('flowers.txt')
+    full_name = input("Enter your First [space] Last name only: ")
+    first_name = full_name[0].lower()
+    first_letter = first_name[0]
+## print command that prints final input with value from corresponding key in dictionary
+    print("Unique flower name with the first letter: {}".format(flower_d[first_letter]))
+
+main()
+```
+## Numpy
+![alt text](image-1144.png)
+![alt text](image-1145.png)
+![alt text](image-1146.png)
+![alt text](image-1147.png)
+![alt text](image-1148.png)
+![alt text](image-1149.png)
+![alt text](image-1150.png)
+![alt text](image-1151.png)
+![alt text](image-1152.png)
+![alt text](image-1153.png)
+![alt text](image-1154.png)
+![alt text](image-1155.png)
+![alt text](image-1156.png)
+![alt text](image-1157.png)
+![alt text](image-1158.png)
+![alt text](image-1159.png)
+![alt text](image-1160.png)
+![alt text](image-1161.png)
+![alt text](image-1162.png)
+![alt text](image-1163.png)
+![alt text](image-1164.png)
+![alt text](image-1165.png)
+![alt text](image-1166.png)
+![alt text](image-1167.png)
+![alt text](image-1168.png)
+![alt text](image-1169.png)
+![alt text](image-1170.png)
+![alt text](image-1171.png)
+![alt text](image-1172.png)
+![alt text](image-1173.png)
+![alt text](image-1174.png)
+![alt text](image-1175.png)
+![alt text](image-1176.png)
+![alt text](image-1177.png)
+![alt text](image-1178.png)
+```Python
+numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)
+```
+![alt text](image-1179.png)
+![alt text](image-1180.png)
+![alt text](image-1181.png)
+![alt text](image-1182.png)
+![alt text](image-1183.png)
+![alt text](image-1184.png)
+![alt text](image-1185.png)
+![alt text](image-1186.png)
+![alt text](image-1187.png)
+![alt text](image-1188.png)
+![alt text](image-1189.png)
+![alt text](image-1190.png)
+![alt text](image-1191.png)
+![alt text](image-1192.png)
+![alt text](image-1193.png)
+![alt text](image-1194.png)
+![alt text](image-1195.png)
+![alt text](image-1196.png)
+![alt text](image-1197.png)
+![alt text](image-1198.png)
+![alt text](image-1199.png)
+![alt text](image-1200.png)
+![alt text](image-1201.png)
+![alt text](image-1202.png)
+![alt text](image-1203.png)
+```Python
+# We create a rank 1 ndarray 
+x = np.array([1, 2, 3, 4, 5])
+
+# We create a rank 2 ndarray
+Y = np.array([[1,2,3],[4,5,6],[7,8,9]])
+
+# We print x
+print()
+print('Original x = ', x)
+
+# We delete the first and last element of x
+x = np.delete(x, [0,4])
+
+# We print x with the first and last element deleted
+print()
+print('Modified x = ', x)
+
+# We print Y
+print()
+print('Original Y = \n', Y)
+
+# We delete the first row of y
+w = np.delete(Y, 0, axis=0)
+
+# We delete the first and last column of y
+v = np.delete(Y, [0,2], axis=1)
+
+# We print w
+print()
+print('w = \n', w)
+
+# We print v
+print()
+print('v = \n', v)
+```
+![alt text](image-1204.png)
+![alt text](image-1205.png)
+```Python
+# We create a rank 1 ndarray 
+x = np.array([1, 2, 3, 4, 5])
+
+# We create a rank 2 ndarray 
+Y = np.array([[1,2,3],[4,5,6]])
+
+# We print x
+print()
+print('Original x = ', x)
+
+# We append the integer 6 to x
+x = np.append(x, 6)
+
+# We print x
+print()
+print('x = ', x)
+
+# We append the integer 7 and 8 to x
+x = np.append(x, [7,8])
+
+# We print x
+print()
+print('x = ', x)
+
+# We print Y
+print()
+print('Original Y = \n', Y)
+
+# We append a new row containing 7,8,9 to y
+v = np.append(Y, [[7,8,9]], axis=0)
+
+# We append a new column containing 9 and 10 to y
+q = np.append(Y,[[9],[10]], axis=1)
+
+# We print v
+print()
+print('v = \n', v)
+
+# We print q
+print()
+print('q = \n', q)
+```
+![alt text](image-1206.png)
+![alt text](image-1208.png)
+```Python
+# We create a rank 1 ndarray 
+x = np.array([1, 2, 5, 6, 7])
+
+# We create a rank 2 ndarray 
+Y = np.array([[1,2,3],[7,8,9]])
+
+# We print x
+print()
+print('Original x = ', x)
+
+# We insert the integer 3 and 4 between 2 and 5 in x. 
+x = np.insert(x,2,[3,4])
+
+# We print x with the inserted elements
+print()
+print('x = ', x)
+
+# We print Y
+print()
+print('Original Y = \n', Y)
+
+# We insert a row between the first and last row of y
+w = np.insert(Y,1,[4,5,6],axis=0)
+
+# We insert a column full of 5s between the first and second column of y
+v = np.insert(Y,1,5, axis=1)
+
+# We print w
+print()
+print('w = \n', w)
+
+# We print v
+print()
+print('v = \n', v)
+```
+![alt text](image-1209.png)
+![alt text](image-1210.png)
+```Python
+# We create a rank 1 ndarray 
+x = np.array([1,2])
+
+# We create a rank 2 ndarray 
+Y = np.array([[3,4],[5,6]])
+
+# We print x
+print()
+print('x = ', x)
+
+# We print Y
+print()
+print('Y = \n', Y)
+
+# We stack x on top of Y
+z = np.vstack((x,Y))
+
+# We stack x on the right of Y. We need to reshape x in order to stack it on the right of Y. 
+w = np.hstack((Y,x.reshape(2,1)))
+
+# We print z
+print()
+print('z = \n', z)
+
+# We print w
+print()
+print('w = \n', w)
+```
+![alt text](image-1211.png)
