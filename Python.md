@@ -722,3 +722,684 @@ print()
 print('w = \n', w)
 ```
 ![alt text](image-1211.png)
+![alt text](image-1213.png)
+```Python
+# We create a 4 x 5 ndarray that contains integers from 0 to 19
+X = np.arange(20).reshape(4, 5)
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We select all the elements that are in the 2nd through 4th rows and in the 3rd to 5th columns
+# (The 1st being index 0)
+Z = X[1:4,2:5]
+
+# We print Z
+print('Z = \n', Z)
+
+# We can select the same elements as above using method 2
+W = X[1:,2:5]
+
+# We print W
+print()
+print('W = \n', W)
+
+# We select all the elements that are in the 1st through 3rd rows and in the 3rd to 4th columns
+Y = X[:3,2:5]
+
+# We print Y
+print()
+print('Y = \n', Y)
+
+# We select all the elements in the 3rd row
+v = X[2,:]
+
+# We print v
+print()
+print('v = ', v)
+
+# We select all the elements in the 3rd column
+q = X[:,2]
+
+# We print q
+print()
+print('q = ', q)
+
+# We select all the elements in the 3rd column but return a rank 2 ndarray
+R = X[:,2:3]
+
+# We print R
+print()
+print('R = \n', R)
+```
+![alt text](image-1214.png)
+![alt text](image-1215.png)
+![alt text](image-1216.png)
+```Python
+# We create a 4 x 5 ndarray that contains integers from 0 to 19
+X = np.arange(20).reshape(4, 5)
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We select all the elements that are in the 2nd through 4th rows and in the 3rd to 4th columns
+Z = X[1:4,2:5]
+
+# We print Z
+print()
+print('Z = \n', Z)
+print()
+
+# We change the last element in Z to 555
+Z[2,2] = 555
+
+# We print X
+print()
+print('X = \n', X)
+print()
+```
+![alt text](image-1217.png)
+![alt text](image-1218.png)
+```Python
+# We create a 4 x 5 ndarray that contains integers from 0 to 19
+X = np.arange(20).reshape(4, 5)
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# create a copy of the slice using the np.copy() function
+Z = np.copy(X[1:4,2:5])
+
+#  create a copy of the slice using the copy as a method
+W = X[1:4,2:5].copy()
+
+# We change the last element in Z to 555
+Z[2,2] = 555
+
+# We change the last element in W to 444
+W[2,2] = 444
+
+# We print X
+print()
+print('X = \n', X)
+
+# We print Z
+print()
+print('Z = \n', Z)
+
+# We print W
+print()
+print('W = \n', W)
+```
+![alt text](image-1219.png)
+![alt text](image-1220.png)
+```Python
+# We create a 4 x 5 ndarray that contains integers from 0 to 19
+X = np.arange(20).reshape(4, 5)
+
+# We create a rank 1 ndarray that will serve as indices to select elements from X
+indices = np.array([1,3])
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print indices
+print('indices = ', indices)
+print()
+
+# We use the indices ndarray to select the 2nd and 4th row of X
+Y = X[indices,:]
+
+# We use the indices ndarray to select the 2nd and 4th column of X
+Z = X[:, indices]
+
+# We print Y
+print()
+print('Y = \n', Y)
+
+# We print Z
+print()
+print('Z = \n', Z)
+```
+![alt text](image-1221.png)
+![alt text](image-1222.png)
+```Python
+# Create a rank 1 ndarray that contains a randomly chosen 10 values between `0` to `len(X)` (50)
+# The row_indices would represent the indices of rows of X
+row_indices = np.random.randint(0,50, size=10)
+print("Random 10 indices are: ", row_indices)
+```
+![alt text](image-1223.png)
+```Python
+# To Do 1 - Print those rows of X whose indices are represented by entire row_indices ndarray
+# Hint - Use the row_indices ndarray to select specified rows of X
+X_subset = X[row_indices, :]
+print(X_subset)
+
+# To Do 2 - Print those rows of X whose indices are present in row_indices[4:8]
+X_subset = X[row_indices[4:8], :]
+print(X_subset)
+```
+![alt text](image-1224.png)
+![alt text](image-1225.png)
+![alt text](image-1226.png)
+![alt text](image-1227.png)
+```Python
+numpy.unique(array, return_index=False, return_inverse=False, return_counts=False, axis=None)
+```
+![alt text](image-1228.png)
+![alt text](image-1229.png)
+```Python
+# We create a 5 x 5 ndarray that contains integers from 0 to 24
+X = np.arange(25).reshape(5, 5)
+
+# We print X
+print()
+print('Original X = \n', X)
+print()
+
+# We use Boolean indexing to select elements in X:
+print('The elements in X that are greater than 10:', X[X > 10])
+print('The elements in X that less than or equal to 7:', X[X <= 7])
+print('The elements in X that are between 10 and 17:', X[(X > 10) & (X < 17)])
+
+# We use Boolean indexing to assign the elements that are between 10 and 17 the value of -1
+X[(X > 10) & (X < 17)] = -1
+
+# We print X
+print()
+print('X = \n', X)
+print()
+```
+![alt text](image-1230.png)
+```Python
+# We create a rank 1 ndarray
+x = np.array([1,2,3,4,5])
+
+# We create a rank 1 ndarray
+y = np.array([6,7,2,8,4])
+
+# We print x
+print()
+print('x = ', x)
+
+# We print y
+print()
+print('y = ', y)
+
+# We use set operations to compare x and y:
+print()
+print('The elements that are both in x and y:', np.intersect1d(x,y))
+print('The elements that are in x that are not in y:', np.setdiff1d(x,y))
+print('All the elements of x and y:',np.union1d(x,y))
+```
+![alt text](image-1231.png)
+![alt text](image-1232.png)
+```Python
+# We create an unsorted rank 1 ndarray
+x = np.random.randint(1,11,size=(10,))
+
+# We print x
+print()
+print('Original x = ', x)
+
+# We sort x and print the sorted array using sort as a function.
+print()
+print('Sorted x (out of place):', np.sort(x))
+
+# When we sort out of place the original array remains intact. To see this we print x again
+print()
+print('x after sorting:', x)
+```
+![alt text](image-1233.png)
+```Python
+# We create an unsorted rank 1 ndarray
+x = np.random.randint(1,11,size=(10,))
+
+# We print x
+print()
+print('Original x = ', x)
+
+# We sort x and print the sorted array using sort as a method.
+x.sort()
+
+# When we sort in place the original array is changed to the sorted array. To see this we print x again
+print()
+print('x after sorting:', x)
+```
+![alt text](image-1234.png)
+![alt text](image-1235.png)
+![alt text](image-1236.png)
+![alt text](image-1237.png)
+![alt text](image-1238.png)
+![alt text](image-1239.png)
+![alt text](image-1240.png)
+![alt text](image-1241.png)
+![alt text](image-1242.png)
+![alt text](image-1243.png)
+![alt text](image-1244.png)
+![alt text](image-1245.png)
+![alt text](image-1246.png)
+```Python
+# We create a 2 x 2 ndarray
+X = np.array([[1,2], [3,4]])
+
+# We print x
+print()
+print('X = \n', X)
+print()
+
+print('Average of all elements in X:', X.mean())
+print('Average of all elements in the columns of X:', X.mean(axis=0))
+print('Average of all elements in the rows of X:', X.mean(axis=1))
+print()
+print('Sum of all elements in X:', X.sum())
+print('Sum of all elements in the columns of X:', X.sum(axis=0))
+print('Sum of all elements in the rows of X:', X.sum(axis=1))
+print()
+print('Standard Deviation of all elements in X:', X.std())
+print('Standard Deviation of all elements in the columns of X:', X.std(axis=0))
+print('Standard Deviation of all elements in the rows of X:', X.std(axis=1))
+print()
+print('Median of all elements in X:', np.median(X))
+print('Median of all elements in the columns of X:', np.median(X,axis=0))
+print('Median of all elements in the rows of X:', np.median(X,axis=1))
+print()
+print('Maximum value of all elements in X:', X.max())
+print('Maximum value of all elements in the columns of X:', X.max(axis=0))
+print('Maximum value of all elements in the rows of X:', X.max(axis=1))
+print()
+print('Minimum value of all elements in X:', X.min())
+print('Minimum value of all elements in the columns of X:', X.min(axis=0))
+print('Minimum value of all elements in the rows of X:', X.min(axis=1))
+```
+![alt text](image-1247.png)
+![alt text](image-1248.png)
+![alt text](image-1249.png)
+![alt text](image-1250.png)
+![alt text](image-1251.png)
+![alt text](image-1252.png)
+![alt text](image-1253.png)
+![alt text](image-1254.png)
+![alt text](image-1255.png)
+![alt text](image-1256.png)
+![alt text](image-1257.png)
+![alt text](image-1258.png)
+![alt text](image-1259.png)
+![alt text](image-1260.png)
+![alt text](image-1261.png)
+![alt text](image-1262.png)
+![alt text](image-1263.png)
+
+## Pandas
+![alt text](image-1264.png)
+![alt text](image-1265.png)
+![alt text](image-1266.png)
+![alt text](image-1267.png)
+Example 1 - Create a Series
+```Python
+# We import Pandas as pd into Python
+import pandas as pd
+
+# We create a Pandas Series that stores a grocery list
+groceries = pd.Series(data = [30, 6, 'Yes', 'No'], index = ['eggs', 'apples', 'milk', 'bread'])
+
+# We display the Groceries Pandas Series
+groceries
+```
+![alt text](image-1268.png)
+![alt text](image-1269.png)
+![alt text](image-1270.png)
+![alt text](image-1271.png)
+```Python
+# We access elements in Groceries using index labels:
+
+# We use a single index label
+print('How many eggs do we need to buy:', groceries['eggs'])
+print()
+
+# we can access multiple index labels
+print('Do we need milk and bread:\n', groceries[['milk', 'bread']]) 
+print()
+
+# we use loc to access multiple index labels
+print('How many eggs and apples do we need to buy:\n', groceries.loc[['eggs', 'apples']]) 
+print()
+
+# We access elements in Groceries using numerical indices:
+
+# we use multiple numerical indices
+print('How many eggs and apples do we need to buy:\n',  groceries[[0, 1]]) 
+print()
+
+# We use a negative numerical index
+print('Do we need bread:\n', groceries[[-1]]) 
+print()
+
+# We use a single numerical index
+print('How many eggs do we need to buy:', groceries[0]) 
+print()
+# we use iloc to access multiple numerical indices
+print('Do we need milk and bread:\n', groceries.iloc[[2, 3]]) 
+```
+![alt text](image-1272.png)
+![alt text](image-1273.png)
+![alt text](image-1274.png)
+```Python
+# We display the original grocery list
+print('Original Grocery List:\n', groceries)
+
+# We remove apples from our grocery list. The drop function removes elements out of place
+print()
+print('We remove apples (out of place):\n', groceries.drop('apples'))
+
+# When we remove elements out of place the original Series remains intact. To see this
+# we display our grocery list again
+print()
+print('Grocery List after removing apples out of place:\n', groceries)
+```
+```Python
+![alt text](image-1275.png)
+# We display the original grocery list
+print('Original Grocery List:\n', groceries)
+
+# We remove apples from our grocery list in place by setting the inplace keyword to True
+groceries.drop('apples', inplace = True)
+
+# When we remove elements in place the original Series its modified. To see this
+# we display our grocery list again
+print()
+print('Grocery List after removing apples in place:\n', groceries)
+```
+![alt text](image-1276.png)
+![alt text](image-1277.png)
+```Python
+# We create a Pandas Series that stores a grocery list of just fruits
+fruits= pd.Series(data = [10, 6, 3,], index = ['apples', 'oranges', 'bananas'])
+
+# We display the fruits Pandas Series
+fruits
+```
+![alt text](image-1278.png)
+```Python
+# We print fruits for reference
+print('Original grocery list of fruits:\n ', fruits)
+
+# We perform basic element-wise operations using arithmetic symbols
+print()
+print('fruits + 2:\n', fruits + 2) # We add 2 to each item in fruits
+print()
+print('fruits - 2:\n', fruits - 2) # We subtract 2 to each item in fruits
+print()
+print('fruits  *2:\n', fruits*  2) # We multiply each item in fruits by 2 
+print()
+print('fruits / 2:\n', fruits / 2) # We divide each item in fruits by 2
+print()
+```
+![alt text](image-1279.png)
+![alt text](image-1280.png)
+```Python
+# We import NumPy as np to be able to use the mathematical functions
+import numpy as np
+
+# We print fruits for reference
+print('Original grocery list of fruits:\n', fruits)
+
+# We apply different mathematical functions to all elements of fruits
+print()
+print('EXP(X) = \n', np.exp(fruits))
+print() 
+print('SQRT(X) =\n', np.sqrt(fruits))
+print()
+print('POW(X,2) =\n',np.power(fruits,2)) # We raise all elements of fruits to the power of 2
+```
+![alt text](image-1281.png)
+![alt text](image-1282.png)
+```Python
+# We print fruits for reference
+print('Original grocery list of fruits:\n ', fruits)
+print()
+
+# We add 2 only to the bananas
+print('Amount of bananas + 2 = ', fruits['bananas'] + 2)
+print()
+
+# We subtract 2 from apples
+print('Amount of apples - 2 = ', fruits.iloc[0] - 2)
+print()
+
+# We multiply apples and oranges by 2
+print('We double the amount of apples and oranges:\n', fruits[['apples', 'oranges']] * 2)
+print()
+
+# We divide apples and oranges by 2
+print('We half the amount of apples and oranges:\n', fruits.loc[['apples', 'oranges']] / 2)
+```
+![alt text](image-1283.png)
+![alt text](image-1284.png)
+![alt text](image-1285.png)
+![alt text](image-1286.png)
+```Python
+# We import Pandas as pd into Python
+import pandas as pd
+
+# We create a dictionary of Pandas Series 
+items = {'Bob' : pd.Series(data = [245, 25, 55], index = ['bike', 'pants', 'watch']),
+         'Alice' : pd.Series(data = [40, 110, 500, 45], index = ['book', 'glasses', 'bike', 'pants'])}
+
+# We print the type of items to see that it is a dictionary
+print(type(items))
+```
+![alt text](image-1287.png)
+```Python
+# We create a Pandas DataFrame by passing it a dictionary of Pandas Series
+shopping_carts = pd.DataFrame(items)
+
+# We display the DataFrame
+shopping_carts
+```
+![alt text](image-1288.png)
+![alt text](image-1289.png)
+![alt text](image-1290.png)
+Example 3. Demonstrate a few attributes of DataFrame
+```Python
+# We print some information about shopping_carts
+print('shopping_carts has shape:', shopping_carts.shape)
+print('shopping_carts has dimension:', shopping_carts.ndim)
+print('shopping_carts has a total of:', shopping_carts.size, 'elements')
+print()
+print('The data in shopping_carts is:\n', shopping_carts.values)
+print()
+print('The row index in shopping_carts is:', shopping_carts.index)
+print()
+print('The column index in shopping_carts is:', shopping_carts.columns)
+```
+![alt text](image-1291.png)
+![alt text](image-1292.png)
+```Python
+# We Create a DataFrame that only has selected items for both Alice and Bob
+sel_shopping_cart = pd.DataFrame(items, index = ['pants', 'book'])
+
+# We display sel_shopping_cart
+sel_shopping_cart
+```
+![alt text](image-1293.png)
+Example 5. Selecting specific columns of a DataFrame
+```Python
+# We Create a DataFrame that only has selected items for Alice
+alice_sel_shopping_cart = pd.DataFrame(items, index = ['glasses', 'bike'], columns = ['Alice'])
+
+# We display alice_sel_shopping_cart
+alice_sel_shopping_cart
+```
+![alt text](image-1294.png)
+![alt text](image-1295.png)
+![alt text](image-1296.png)
+![alt text](image-1297.png)
+![alt text](image-1298.png)
+![alt text](image-1299.png)
+```Python
+# We print the store_items DataFrame
+print(store_items)
+
+# We access rows, columns and elements using labels
+print()
+print('How many bikes are in each store:\n', store_items[['bikes']])
+print()
+print('How many bikes and pants are in each store:\n', store_items[['bikes', 'pants']])
+print()
+print('What items are in Store 1:\n', store_items.loc[['store 1']])
+print()
+print('How many bikes are in Store 2:', store_items['bikes']['store 2'])
+```
+![alt text](image-1300.png)
+![alt text](image-1301.png)
+```Python
+# We add a new column named shirts to our store_items DataFrame indicating the number of
+# shirts in stock at each store. We will put 15 shirts in store 1 and 2 shirts in store 2
+store_items['shirts'] = [15,2]
+
+# We display the modified DataFrame
+store_items
+```
+![alt text](image-1302.png)
+```Python
+# We make a new column called suits by adding the number of shirts and pants
+store_items['suits'] = store_items['pants'] + store_items['shirts']
+
+# We display the modified DataFrame
+store_items
+```
+![alt text](image-1303.png)
+```Python
+# We create a dictionary from a list of Python dictionaries that will contain the number of different items at the new store
+new_items = [{'bikes': 20, 'pants': 30, 'watches': 35, 'glasses': 4}]
+
+# We create new DataFrame with the new_items and provide and index labeled store 3
+new_store = pd.DataFrame(new_items, index = ['store 3'])
+
+# We display the items at the new store
+new_store
+```
+![alt text](image-1304.png)
+Example 5. Add new column that has data from the existing columns
+```Python
+# We add a new column using data from particular rows in the watches column
+store_items['new watches'] = store_items['watches'][1:]
+
+# We display the modified DataFrame
+store_items
+```
+![alt text](image-1305.png)
+Example 6. Add new column at a specific location
+```Python
+# We insert a new column with label shoes right before the column with numerical index 4
+store_items.insert(4, 'shoes', [8,5,0])
+
+# we display the modified DataFrame
+store_items
+```
+![alt text](image-1306.png)
+![alt text](image-1307.png)
+![alt text](image-1308.png)
+![alt text](image-1309.png)
+![alt text](image-1310.png)
+![alt text](image-1311.png)
+```Python
+# We create a list of Python dictionaries
+items2 = [{'bikes': 20, 'pants': 30, 'watches': 35, 'shirts': 15, 'shoes':8, 'suits':45},
+{'watches': 10, 'glasses': 50, 'bikes': 15, 'pants':5, 'shirts': 2, 'shoes':5, 'suits':7},
+{'bikes': 20, 'pants': 30, 'watches': 35, 'glasses': 4, 'shoes':10}]
+
+# We create a DataFrame  and provide the row index
+store_items = pd.DataFrame(items2, index = ['store 1', 'store 2', 'store 3'])
+
+# We display the DataFrame
+store_items
+```
+![alt text](image-1312.png)
+![alt text](image-1313.png)
+![alt text](image-1314.png)
+![alt text](image-1315.png)
+```Python
+# We print the number of non-NaN values in our DataFrame
+print()
+print('Number of non-NaN values in the columns of our DataFrame:\n', store_items.count())
+```
+![alt text](image-1316.png)
+![alt text](image-1317.png)
+![alt text](image-1318.png)
+![alt text](image-1319.png)
+![alt text](image-1320.png)
+![alt text](image-1321.png)
+![alt text](image-1322.png)
+![alt text](image-1323.png)
+```Python
+# We replace NaN values by using linear interpolation using column values
+store_items.interpolate(method = 'linear', axis = 0)
+```
+![alt text](image-1324.png)
+```Python
+# We replace NaN values by using linear interpolation using row values
+store_items.interpolate(method = 'linear', axis = 1)
+```
+![alt text](image-1325.png)
+![alt text](image-1326.png)
+![alt text](image-1327.png)
+![alt text](image-1328.png)
+![alt text](image-1329.png)
+![alt text](image-1330.png)
+![alt text](image-1331.png)
+![alt text](image-1332.png)
+![alt text](image-1333.png)
+![alt text](image-1334.png)
+![alt text](image-1335.png)
+![alt text](image-1336.png)
+![alt text](image-1337.png)
+![alt text](image-1338.png)
+![alt text](image-1339.png)
+![alt text](image-1340.png)
+```Python
+# We display the total salary each employee received in all the years they worked for the company
+data.groupby(['Name'])['Salary'].sum()
+```
+![alt text](image-1341.png)
+![alt text](image-1342.png)
+![alt text](image-1343.png)
+![alt text](image-1344.png)
+![alt text](image-1345.png)
+![alt text](image-1346.png)
+![alt text](image-1347.png)
+![alt text](image-1348.png)
+![alt text](image-1349.png)
+![alt text](image-1350.png)
+Quiz Solution: Implement my_enumerate
+```Python
+lessons = ["Why Python Programming", "Data Types and Operators", "Control Flow", "Functions", "Scripting"]
+
+def my_enumerate(iterable, start=0):
+    count = start
+    for element in iterable:
+        yield count, element
+        count += 1
+
+for i, lesson in my_enumerate(lessons, 1):
+    print("Lesson {}: {}".format(i, lesson))
+```
+![alt text](image-1351.png)
+![alt text](image-1352.png)
+![alt text](image-1353.png)
+```Python
+sq_list = [x**2 for x in range(10)]  # this produces a list of squares
+
+sq_iterator = (x**2 for x in range(10))  # this produces an iterator of squares
+```
+This can help you save time and create efficient code!
