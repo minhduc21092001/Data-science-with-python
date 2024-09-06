@@ -1,11 +1,10 @@
 import pandas as pd
 
-filename = 'chicago.csv'
+CITY_DATA = { 'chicago': 'chicago.csv',
+              'new york': 'new_york_city.csv',
+              'washington': 'washington.csv' }
 
-## load data file into a dataframe
-df = pd.read_csv(filename)
-
-## print value counts for each user type
-user_types = df['User Type'].value_counts()
-
-print(user_types)
+df = pd.read_csv(CITY_DATA['chicago'])
+df['Start Time'] = pd.to_datetime(df['Start Time'])
+df['Day_of_week'] = df['Start Time'].dt.weekday
+print(df['Day_of_week'])
